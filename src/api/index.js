@@ -5,13 +5,14 @@
  */
  import ajax from './ajax';
 
- const BASE = '';
+ const BASE = 'http://121.89.203.83:8080';
  
  //登录
  // export function reqLogin(username, password) {
  //     ajax('/login', {username, password}, "POST")
  // }
- export const reqLogin = (username, password) => ajax(BASE + '/login', {username, password}, "POST");
+//  export const reqLogin = (username, password) => ajax(BASE + '/login', {username, password}, "POST");
+ export const reqLogin = (username, password) => ajax(BASE + '/uaa/login/token?'+'username='+username+"&password="+password, {username, password}, "POST");
  
  //获取所有用户列表
  export const reqUsers = () => ajax(BASE + '/manage/user/list');

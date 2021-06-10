@@ -4,7 +4,9 @@ import { TabletOutlined, LockOutlined } from '@ant-design/icons';
 import './login.less';
 // import logo from './images/logo.png';
 import memoryUtils from '../../utils/memoryUtils';
+import storageUtils from '../../utils/storageUtils';
 import {reqLogin} from '../../api';
+import { setToken} from "../../utils/session";
 
 const Item = Form.Item //不能写在import之前
 
@@ -29,7 +31,7 @@ export default class Login extends Component{
     //提交表单且数据验证成功后回调事件
     
     onFinish = async (values) => {
-        //console.log('Received values of form: ', values);
+        // console.log('Received values of form: ', values);
         //const {username,password} = values;
         // reqLogin(username,password).then(response => {
         //     //console.log('请求成功了',response.data)
@@ -43,24 +45,47 @@ export default class Login extends Component{
         // }).catch(error => {
         //     console.log('请求失败了',error)
         // })
-        const {username,password} = values;
+        const username = values.username;
+        const password = btoa(values.password);//加密
+        console.log(username,password);
+        // const {username,password} = values;
+
         //const response = await reqLogin(username,password);
         //const result = response.data //{status:0, data: user} {status:1, msg:'xxx'}
         //const result = await reqLogin(username,password);
         //if(result.status===0){//登录成功
-        if(username==="18888888888"  && password==="a12345"){//登录成功 写死
-            message.success('登录成功'); //提示登录成功
+
+        // if(username==="18888888888"  && password==="a12345"){//登录成功 写死
+        //     message.success('登录成功'); //提示登录成功
             
-            const user = {username:"18888888888", password:"a12345"} //写死，原来没有
-            //保存user
-            const result = {status:0, data: user}
-            //const user = result.data
+        //     const user = {username:"18888888888", password:"a12345"} //写死，原来没有
+        //     //保存user
+        //     const result = {status:0, data: user}
+        //     //const user = result.data
            
+        //     memoryUtils.user = user; //保存在内存中☆
+
+        //     this.props.history.replace('/'); //跳转到管理页面，且不需要回退到登录
+        // }else{//登录失败
+        //     const result = {status:1, msg:'登录失败'}
+        //     message.error(result.msg);//提示错误信息
+        // }
+        
+        const result = await reqLogin(username,password);
+        if(result.code===200){//登录成功
+            message.success('登录成功'); //提示登录成功
+
+            //存储token
+            console.log(result.data.access_token);
+            setToken(result.data.access_token);
+
+            //保存user
+            const user = result.data
             memoryUtils.user = user; //保存在内存中☆
+            storageUtils.saveUser(user) //保存到local中
 
             this.props.history.replace('/'); //跳转到管理页面，且不需要回退到登录
         }else{//登录失败
-            const result = {status:1, msg:'登录失败'}
             message.error(result.msg);//提示错误信息
         }
     };
@@ -191,7 +216,7 @@ render(){
                                             忘记密码
                                         </a>
                                     </Form.Item>
-                                    <div className="notes">账号：18888888888   密码：a12345</div>
+                                    <div className="notes">账号：18811418763   密码：lyh684368</div>
                                     <Form.Item className="login-button">
                                         <Button type="primary" htmlType="submit" className="login-form-button" onClick={this.getFormData}>
                                             登录

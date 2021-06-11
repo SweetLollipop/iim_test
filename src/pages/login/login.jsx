@@ -6,7 +6,7 @@ import './login.less';
 import memoryUtils from '../../utils/memoryUtils';
 import storageUtils from '../../utils/storageUtils';
 import {reqLogin} from '../../api';
-import { setToken} from "../../utils/session";
+import {setToken} from "../../utils/session";
 
 const Item = Form.Item //不能写在import之前
 
@@ -24,13 +24,14 @@ export default class Login extends Component{
     }
 
     getFormData = (event) => {  
-        //event.preventDefault();
+        // event.preventDefault();
         console.log("formData:",this.refs.loginInfoForm.getFieldValue());
     };
 
     //提交表单且数据验证成功后回调事件
     
     onFinish = async (values) => {
+        
         // console.log('Received values of form: ', values);
         //const {username,password} = values;
         // reqLogin(username,password).then(response => {
@@ -84,7 +85,7 @@ export default class Login extends Component{
             memoryUtils.user = user; //保存在内存中☆
             storageUtils.saveUser(user) //保存到local中
 
-            this.props.history.replace('/'); //跳转到管理页面，且不需要回退到登录
+            this.props.history.replace('/home'); //跳转到管理页面，且不需要回退到登录
         }else{//登录失败
             message.error(result.msg);//提示错误信息
         }

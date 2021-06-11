@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import { Redirect, Route, Switch } from 'react-router';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import memoryUtils from '../../utils/memoryUtils';
 
 // import LeftNav from '../../components/left-nav';
@@ -8,9 +8,6 @@ import IndexRight from '../../components/indexRight';
 import './admin.less';
 
 import User from './user/user';
-
-
-
 
 import { Layout, Menu } from 'antd';
 import {
@@ -21,11 +18,12 @@ import {
     UploadOutlined,
   } from '@ant-design/icons';
 import { withError } from 'antd/lib/modal/confirm';
+import PrivateRouter from '../../components/privateRouter';
 const {  Sider, Content, Header, Footer} = Layout;
 /**
  * 后台管理的路由组件
  */
-export default class Admin extends Component {
+class Admin extends Component {
     state = {
         collapsed: false,
       };
@@ -110,3 +108,4 @@ export default class Admin extends Component {
         )
     }
 }
+export default withRouter(Admin);

@@ -6,6 +6,7 @@ import memoryUtils from '../../utils/memoryUtils';
 import storageUtils from '../../utils/storageUtils';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { withRouter } from 'react-router-dom';
+import { removeToken } from '../../utils/session';
 
 class IndexRight extends Component {
     state = {  }
@@ -21,6 +22,8 @@ class IndexRight extends Component {
               //删除保存的user数据
               storageUtils.removeUser();
               memoryUtils.user={};
+              //删除保存的token
+              removeToken();
               //跳转到login
               this.props.history.replace('/login');
             },

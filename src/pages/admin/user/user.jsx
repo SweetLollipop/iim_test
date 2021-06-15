@@ -6,10 +6,12 @@ import {
   Modal,
   message,
   Breadcrumb,
+  Divider,
 } from 'antd';
+import { Link } from "react-router-dom";
 import { ExclamationCircleOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons';
-import { formateDate } from '../../../utils/dateUtils';
-import LinkButton from '../../../components/link-button';
+// import { formateDate } from '../../../utils/dateUtils';
+// import LinkButton from '../../../components/link-button';
 import { PAGE_SIZE } from '../../../utils/constants';
 import { reqAddOrUpdateUser, reqDeleteUser, reqUsers } from '../../../api';
 import UserForm from './user-form.jsx';
@@ -36,8 +38,7 @@ export default class User extends Component {
         this.columns = [
             {
                 title: '序号',
-                dataIndex: 'order',
-                render: (order) => order + 1
+                dataIndex: '_id',
             },
             {
               title: '姓名',
@@ -45,30 +46,44 @@ export default class User extends Component {
             },
             {
               title: '性别',
-              dataIndex: 'sex',
+              render: (value) => (
+                <>
+                  {value.sex === 0 && <>男</>}
+                  {value.sex === 1 && <>女</>}
+                  {value.sex === 2 && <>未知</>}
+                </>
+              ),
+            },
+            {
+                title: "昵称",
+                dataIndex: "nickname"
             },
             {
               title: '手机号',
-              dataIndex: 'phone',
-            },
-           
-            {
-                title: '角色',
-                dataIndex: 'role_id',
-                // render: (role_id) => this.state.roles.find(role => role_id===role_id).name
-                // render: (role_id) => this.roleNames[role_id],
+              dataIndex: 'mobile',
             },
             {
-                title: '状态',
-                dataIndex: 'status',
+                title: "角色",
+                //dataIndex: "roles"
+                render: (value) => <>{value.roles.toString()}</>
             },
             {
-                title: '操作',
-                render: (user) =>(
-                    <span>
-                        <LinkButton onClick={() => this.showUpdateUser(user)}>修改</LinkButton>
-                        <LinkButton onClick={() => this.deleteUser(user)}>删除</LinkButton>
-                    </span>
+                title: "状态",
+                render: (value) => (
+                    <>
+                    {value.status === 0 && <>禁用</>}
+                    {value.status === 1 && <>正常</>}
+                    </>
+                )
+            },
+            {
+                title: "操作",
+                render: (value) => (
+                  <>
+                    <Link to={"/admin/user/users/view/" + value.id}>查看</Link>
+                    <Divider type="vertical" />
+                    <Link to={"/admin/user/users/edit/" + value.id}>编辑</Link>
+                  </>
                 )
             },
         ]

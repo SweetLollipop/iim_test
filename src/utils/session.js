@@ -1,7 +1,10 @@
+
+
 const tokenAdmin = 'adminToken';
 
-export function setToken(value){
-    sessionStorage.setItem(tokenAdmin,value);
+export function setToken(token){
+    sessionStorage.setItem(tokenAdmin,token);
+    
 }
 
 export function getToken(){

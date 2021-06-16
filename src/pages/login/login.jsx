@@ -8,6 +8,9 @@ import storageUtils from '../../utils/storageUtils';
 import {reqLogin} from '../../api';
 import {setToken} from "../../utils/session";
 
+import setAuthToken from '../../api/setAuthToken';
+
+
 const Item = Form.Item //不能写在import之前
 
 /**
@@ -18,6 +21,7 @@ export default class Login extends Component{
     
     constructor(props){
         super(props);
+        
         this.state={
 
         }
@@ -79,6 +83,8 @@ export default class Login extends Component{
             //存储token
             console.log(result.data.access_token);
             setToken(result.data.access_token);
+            //设置axios  的header
+            setAuthToken(result.data.access_token);
 
             //保存user
             const user = result.data

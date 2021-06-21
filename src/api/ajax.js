@@ -6,7 +6,8 @@
  *    在外层包一个自己创建的promise对象
  *    在请求出错时，不reject(error),而是显示错误提示
  */
- import axios from 'axios';
+//  import axios from 'axios';
+ import service from '../utils/request';
  import {message} from 'antd';
  
  export default function ajax(url, data={}, type='GET'){
@@ -14,11 +15,11 @@
          let promise
          //1.执行异步ajax请求
          if(type=='GET'){       //发送GET请求
-             promise =  axios.get(url, {//配置对象
+             promise =  service.get(url, {//配置对象
                  params: data //指定请求参数
              })
          }else{                 //发送post请求
-             promise =  axios.post(url, data)
+             promise =  service.post(url, data)
          }
          
          promise.then(response => {//2.如果成功了，调用resolve(value)
@@ -31,7 +32,7 @@
  }
  
  //请求登录接口
- ajax('/login', {username: 'Tom', password: '123456'}, 'POST').then()
+//  ajax('/login', {username: 'Tom', password: '123456'}, 'POST').then()
  //添加用户
- ajax('/manage/user/add', {username: 'Tom', password: '123456', phone: '13712341234'}, 'POST').then()
+//  ajax('/manage/user/add', {username: 'Tom', password: '123456', phone: '13712341234'}, 'POST').then()
  

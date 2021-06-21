@@ -84,7 +84,7 @@ export default class Login extends Component{
             console.log(result.data.access_token);
             setToken(result.data.access_token);
             //设置axios  的header
-            setAuthToken(result.data.access_token);
+            //setAuthToken(result.data.access_token);
 
             //保存user
             const user = result.data
@@ -148,17 +148,17 @@ render(){
     return(
         <div style={{height:'100%'}}>
             <div>
-                <div class="style_body" style={{height: 'calc(100vh - 60px)'}}>
-                    <div class="style_loginFlex">
-                        <div class="style_jieshao">
+                <div className="style_body" style={{height: 'calc(100vh - 60px)'}}>
+                    <div className="style_loginFlex">
+                        <div className="style_jieshao">
                             <p>欢迎登录账号</p>
-                            <div class="style_divide"></div>
+                            <div className="style_divide"></div>
                             <p>工业互联网检测与服务平台</p>
                             <p>Industrial Internet monitoring and service platform</p>
                         </div>
                         <div className='style_psw'>
                             <section className='login-content'>
-                                <div class="style_pswtag">登录账号</div>
+                                <div className="style_pswtag">登录账号</div>
                                 <Form
                                     ref="loginInfoForm"
                                     name="normal_login"
@@ -243,8 +243,8 @@ render(){
                     </div>
                 </div>
             </div>
-            <div class="style_footer">
-                <div class="style_content">
+            <div className="style_footer">
+                <div className="style_content">
                     <span>工业互联网软件监测与测评中心版权所有 未经授权不得转载 京ICP备19013049号-3</span>
                 </div>
             </div>

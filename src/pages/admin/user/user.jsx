@@ -89,17 +89,17 @@ export default class User extends Component {
         ]
     }
 
-    /*
-    根据role的数组，生成包含所有角色名的对象（属性名用角色id值）
-    */
-    innitRoleNames = (roles) =>{
-        const roleNames = roles.reduce((pre,role) => {
-            pre[role._id] = role.name;
-            return pre;
-        },{})
-        //保存roelNames
-        this.roleNames = roleNames;
-    }
+    // /*
+    // 根据role的数组，生成包含所有角色名的对象（属性名用角色id值）
+    // */
+    // innitRoleNames = (roles) =>{
+    //     const roleNames = roles.reduce((pre,role) => {
+    //         pre[role._id] = role.name;
+    //         return pre;
+    //     },{})
+    //     //保存roelNames
+    //     this.roleNames = roleNames;
+    // }
 
      /*
     获取所有用户列表
@@ -108,7 +108,7 @@ export default class User extends Component {
         const result = await reqUsers();
         if (result.code===200) {
            const {users, roles} = result.data;
-           this.innitRoleNames(roles);
+        //    this.innitRoleNames(roles);
            this.setState({
                users,
                roles,

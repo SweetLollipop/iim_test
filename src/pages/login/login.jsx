@@ -10,6 +10,8 @@ import {setToken} from "../../utils/session";
 
 import setAuthToken from '../../api/setAuthToken';
 
+import { LoginAPI } from '../../api/account';
+
 
 const Item = Form.Item //不能写在import之前
 
@@ -40,7 +42,7 @@ export default class Login extends Component{
         //const {username,password} = values;
         // reqLogin(username,password).then(response => {
         //     //console.log('请求成功了',response.data)
-        //     const result = response.data //{status:0, data: user} {status:1, msg:'xxx'}
+        //   const result = response.data //{status:0, data: user} {status:1, msg:'xxx'}
         //     if(result.status===0){//登录成功
         //         message.success('登录成功'); //提示登录成功
         //         this.props.history.replace('/'); //跳转到管理页面，且不需要回退到登录
@@ -76,6 +78,31 @@ export default class Login extends Component{
         //     message.error(result.msg);//提示错误信息
         // }
         
+
+        // LoginAPI(username,password).then(response => {
+        //     //console.log('请求成功了',response.data)
+        //   const result = response.data //{status:0, data: user} {status:1, msg:'xxx'}
+        //     if(result.status===200){//登录成功
+        //         message.success('登录成功'); //提示登录成功
+        //         //存储token
+        //         console.log(result.data.access_token);
+        //         setToken(result.data.access_token);
+        //         //设置axios  的header
+        //         //setAuthToken(result.data.access_token);
+
+        //         //保存user
+        //         const user = result.data
+        //         memoryUtils.user = user; //保存在内存中☆
+        //         storageUtils.saveUser(user) //保存到local中
+
+        //         this.props.history.replace('/home'); //跳转到管理页面，且不需要回退到登录
+        //         }else{//登录失败
+        //             message.error(result.msg);//提示错误信息
+        //         }
+        // }).catch(error => {
+        //     console.log('请求失败了',error)
+        // })
+
         const result = await reqLogin(username,password);
         if(result.code===200){//登录成功
             message.success('登录成功'); //提示登录成功
@@ -101,48 +128,6 @@ export default class Login extends Component{
     onFinishFailed = ({values, errorFields, outOfDate }) =>{
         console.log('Failed to receive form data: ', values, 'Failure field:', errorFields, 'outOfDate:', outOfDate);
     }
-
-    // const { getFieldDecorator, validateFields } = form;
-
-    // const handlOnsave = useCallback(() => {
-    //     validateFields((err: any, fieldsValue: any) => {
-    //     if (err) return;
-    //     const { check = [] } = fieldsValue;
-    //     fieldsValue.password = btoa(fieldsValue.password);
-    //     let res = {
-    //         ...fieldsValue,
-    //         check: check[0],
-    //         isNeedCaptcha: false
-    //     };
-    //     //delete fieldsValue.check;
-    //     dispatch({
-    //         type: "login/password",
-    //         params: [res]
-    //     }).then((v: any) => {
-    //         if (v.code === 200) {
-    //         message.info("登录成功");
-    //         window.location.href = "/#/web";
-    //         }
-    //         if (v.code === 5000) {
-    //         message.error("账号不存在");
-    //         }
-    //         if (v.code === 3000) {
-    //         message.error("登录密码错误");
-    //         }
-    //         if (v.code === 3001) {
-    //         message.error("您的账号已停用，请联系管理员");
-    //         }
-    //     });
-    //     });
-    // }, [dispatch, validateFields]);
-
-    // const enter = (e: any) => {
-    //     if (e.nativeEvent.keyCode === 13) {
-    //     //e.nativeEvent获取原生的事件对像
-    //     handlOnsave();
-    //     }
-    // };
-    
 
 render(){
     return(

@@ -20,8 +20,10 @@ service.interceptors.request.use(function (config) {
 
   if (Authorization && Authorization !== "undefined") {
     // headers 每个请求都需要用到的
-    axios.defaults.headers.common["Authorization"] = "Bearer "+Authorization;
-    // newOptions.headers["Authorization"] =
+    // axios.defaults.headers.common["Authorization"] = "Bearer "+Authorization;
+    config.headers.Authorization = "Bearer "+Authorization;
+    // 处理完之后一定要把 config 返回，否则请求就会停在这里
+    return config;
     //   "Bearer b914d783-52e4-4ccb-8fb7-2282fbe9bf43";
   }
     return config;

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getToken } from "./session";
+import { getToken } from "./cookies";
 
 /**
  * 请求拦截

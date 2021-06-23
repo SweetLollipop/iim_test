@@ -6,9 +6,8 @@ import './login.less';
 import memoryUtils from '../../utils/memoryUtils';
 import storageUtils from '../../utils/storageUtils';
 import {reqLogin} from '../../api';
-import {setToken} from "../../utils/session";
+import {setToken} from "../../utils/cookies";
 
-import setAuthToken from '../../api/setAuthToken';
 
 import { LoginAPI } from '../../api/account';
 
@@ -110,15 +109,14 @@ export default class Login extends Component{
             //存储token
             console.log(result.data.access_token);
             setToken(result.data.access_token);
-            //设置axios  的header
-            //setAuthToken(result.data.access_token);
-
+            
             //保存user
             const user = result.data
+            // setUsername(result.data.username); //保存到cookies中
             memoryUtils.user = user; //保存在内存中☆
             storageUtils.saveUser(user) //保存到local中
 
-            this.props.history.replace('/home'); //跳转到管理页面，且不需要回退到登录
+            this.props.history.replace('/'); //跳转到管理页面，且不需要回退到登录
         }else{//登录失败
             message.error(result.msg);//提示错误信息
         }

@@ -107,6 +107,7 @@ export default class User extends Component {
     getUsers = async() => {
         const result = await reqUsers();
         if (result.code===200) {
+            console.log(result.data);
            const {users, roles} = result.data;
         //    this.innitRoleNames(roles);
            this.setState({
@@ -188,7 +189,7 @@ export default class User extends Component {
 
     componentDidMount(){
         this.getUsers();
-    }
+    };
 
 
     render() {

@@ -26,6 +26,7 @@ export default class User extends Component {
     constructor(props){
         super(props);
         this.state={
+            data: [],
             users: [], // 所有的用户列表
             roles: [], // 所有角色的列表
             isShow: false, //是否显示确认框
@@ -107,12 +108,13 @@ export default class User extends Component {
     getUsers = async() => {
         const result = await reqUsers();
         if (result.code===200) {
-            console.log(result.data);
-           const {users, roles} = result.data;
-        //    this.innitRoleNames(roles);
+            console.log(result);
+           //const {users, roles} = result.data;
+           //this.innitRoleNames(roles);
            this.setState({
-               users,
-               roles,
+                //users,
+                //roles,
+                data: result.data,
            }) 
         }
     }
@@ -195,6 +197,7 @@ export default class User extends Component {
     render() {
         const {users, roles, isShow} = this.state
         const user = this.user || {}; //赋值或赋空对象
+        
         const title = <Button
                         style={{color: "#fff", backgroundColor: "#30b0d3"}}
                         onClick={this.showAddUser}
@@ -222,26 +225,30 @@ export default class User extends Component {
                         <AntSearchForm/>
                     </div>
                     <div className="ant-card">
+                        
                         <Card title={title}>
+
                             <Table
-                            bordered
-                            rowKey='_id'
-                            dataSource={users}
-                            columns={this.columns}
-                            pagination={{defaultPageSize: PAGE_SIZE}}
+                              bordered
+                              rowKey='_id'
+                              dataSource={this.state.data}
+                              columns={this.columns}
+                              pagination={{defaultPageSize: PAGE_SIZE}}
                             />
+
                             <Modal
-                            title={user._id ? '修改用户' : '添加用户'}
-                            visible={isShow}
-                            onOk={this.addOrUpdateUser}
-                            onCancel={() => {this.setState({isShow: false}); console.log(user);}}
+                              title={user._id ? '修改用户' : '添加用户'}
+                              visible={isShow}
+                              onOk={this.addOrUpdateUser}
+                              onCancel={() => {this.setState({isShow: false}); console.log(user);}}
                             >
                                 <UserForm     //  引入子组件UserFrom
-                                ref={this.formRef}
-                                roles={roles}
-                                user={user}
+                                  ref={this.formRef}
+                                  roles={roles}
+                                  user={user}
                                 />
                             </Modal>
+
                         </Card>
                     </div>
                 </div>

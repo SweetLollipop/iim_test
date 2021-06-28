@@ -31,6 +31,7 @@ export default class User extends Component {
             users: [], // 所有的用户列表
             roles: [], // 所有角色的列表
             isShow: false, //是否显示确认框
+            
         }
     }
 
@@ -87,9 +88,35 @@ export default class User extends Component {
                 title: "操作",
                 render: (value) => (
                   <>
-                    <Link to={"/admin/user/users/view/" + value.id}>查看</Link>
+                    <Link to={{pathname:"/user/view", 
+                               state:{
+                                   id:value.id, 
+                                   username:value.username, 
+                                   sex:value.sex, 
+                                   nickname:value.nickname, 
+                                   mobile:value.mobile, 
+                                   roles:value.roles, 
+                                   status: value.statys
+                                }
+                            }}
+                    >
+                        查看
+                    </Link>
                     <Divider type="vertical" />
-                    <Link to={"/admin/user/users/edit/" + value.id}>编辑</Link>
+                    <Link to={{pathname:"/user/edit",
+                               state:{
+                                id:value.id, 
+                                username:value.username, 
+                                sex:value.sex, 
+                                nickname:value.nickname, 
+                                mobile:value.mobile, 
+                                roles:value.roles, 
+                                status: value.statys
+                               }
+                            }}
+                    >
+                        编辑
+                    </Link>
                   </>
                 )
             },

@@ -19,20 +19,31 @@ import {
   } from '@ant-design/icons';
 import { withError } from 'antd/lib/modal/confirm';
 import PrivateRouter from '../../components/privateRouter';
+import ViewUser from './user/view';
+import EidtUser from './user/edit';
 const {  Sider, Content, Header, Footer} = Layout;
 /**
  * 后台管理的路由组件
  */
 class Admin extends Component {
+
+    // constructor(props){
+    //     super(props);
+    //     this.state={
+    //         // id: this.props.match.params.id,
+            
+    //     }
+    // }
+
     state = {
         collapsed: false,
-      };
+    };
     
-      toggle = () => {
-        this.setState({
-          collapsed: !this.state.collapsed,
-        });
-      };
+    toggle = () => {
+    this.setState({
+        collapsed: !this.state.collapsed,
+    });
+    };
 
     render(){
 
@@ -95,8 +106,10 @@ class Admin extends Component {
                     >
                         <Switch>
                             
-                            <Route path='/user' component={User}/>
-                            
+                            <Route exact path='/user' component={User}/>
+                            <Route exact path='/user/view' component={ViewUser}/>
+                            <Route exact path='/user/edit' component={EidtUser}/>
+
                             <Redirect to='/home'/>
                         </Switch>
                     </Content>

@@ -15,7 +15,7 @@
  export const reqLogin = (username, password) => ajax(BASE + '/uaa/login/token?'+'username='+username+"&password="+password, {username, password}, "POST");
  
  //获取所有用户列表
- export const reqUsers = () => ajax(BASE + '/ucenter/admin/sys/user/getList',{},'POST');
+ export const reqUsers = () => ajax(BASE + '/ucenter/admin/sys/user/getList',{"pageNum": 1, "pageSize": 20, "sortBy": ""},'POST');
  
  //删除指定用户
  export const reqDeleteUser = (userId) => ajax(BASE + '/manage/user/delete', {userId}, 'POST');

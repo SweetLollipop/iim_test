@@ -7,6 +7,7 @@ import {
   message,
   Breadcrumb,
   Divider,
+  Pagination,
 } from 'antd';
 import { Link } from "react-router-dom";
 import { ExclamationCircleOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons';
@@ -39,8 +40,13 @@ export default class User extends Component {
         this.columns = [
             {
                 title: '序号',
-                dataIndex: '_id',
+                dataIndex: 'index',
+                render:(text,record,index)=>`${index+1}`,
             },
+            // {
+            //     title: 'ID',
+            //     dataIndex: 'id',
+            // },
             {
               title: '姓名',
               dataIndex: 'username',
@@ -235,6 +241,13 @@ export default class User extends Component {
                               columns={this.columns}
                               pagination={{defaultPageSize: PAGE_SIZE}}
                             />
+
+                            {/* <Pagination
+                              total={this.state.data.total}
+                              showSizeChanger
+                              showQuickJumper
+                              showTotal={total => `Total ${total} items`}
+                            /> */}
 
                             <Modal
                               title={user._id ? '修改用户' : '添加用户'}

@@ -90,13 +90,13 @@ export default class User extends Component {
                   <>
                     <Link to={{pathname:"/user/view", 
                                state:{
-                                   id:value.id, 
-                                   username:value.username, 
-                                   sex:value.sex, 
-                                   nickname:value.nickname, 
-                                   mobile:value.mobile, 
-                                   roles:value.roles, 
-                                   status: value.statys
+                                   id: value.id, 
+                                   username: value.username, 
+                                   sex: value.sex, 
+                                   nickname: value.nickname, 
+                                   mobile: value.mobile, 
+                                   roles: value.roles, 
+                                   status: value.status,
                                 }
                             }}
                     >
@@ -105,13 +105,13 @@ export default class User extends Component {
                     <Divider type="vertical" />
                     <Link to={{pathname:"/user/edit",
                                state:{
-                                id:value.id, 
-                                username:value.username, 
-                                sex:value.sex, 
-                                nickname:value.nickname, 
-                                mobile:value.mobile, 
-                                roles:value.roles, 
-                                status: value.statys
+                                id: value.id, 
+                                username: value.username, 
+                                sex: value.sex, 
+                                nickname: value.nickname, 
+                                mobile: value.mobile, 
+                                roles: value.roles, 
+                                status: value.status,
                                }
                             }}
                     >

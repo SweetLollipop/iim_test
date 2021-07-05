@@ -5,7 +5,7 @@
  */
  import ajax from './ajax';
 
- const BASE = 'http://121.89.203.83:8080';
+ const BASE = 'http://172.20.22.60:8080';
  
  //登录
  // export function reqLogin(username, password) {

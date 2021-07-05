@@ -15,7 +15,7 @@
  export const reqLogin = (username, password) => ajax(BASE + '/uaa/login/token?'+'username='+username+"&password="+password, {username, password}, "POST");
  
  //获取所有用户列表
- export const reqUsers = () => ajax(BASE + '/ucenter/admin/sys/user/getList',{"pageNum": 1, "pageSize": 20, "sortBy": ""},'POST');
+ export const reqUsers = () => ajax(BASE + '/ucenter/admin/sys/user/getList',{"pageNum": 1, "pageSize": 100, "sortBy": ""},'POST');
  
  //删除指定用户
  export const reqDeleteUser = (userId) => ajax(BASE + '/manage/user/delete', {userId}, 'POST');
@@ -23,3 +23,7 @@
  
  //添加或修改用户
  export const reqAddOrUpdateUser = (user) => ajax(BASE + '/manage/user/'+(user._id ? 'update' : 'add'), user, 'POST');
+
+ //查看或编辑用户
+
+ export const reqViewOrEdit = (userId) => ajax(BASE +'/ucenter/admin/sys/user/detail/'+userId,{userId},'GET');

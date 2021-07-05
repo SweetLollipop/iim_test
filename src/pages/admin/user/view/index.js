@@ -1,5 +1,7 @@
 import { Form, Input, Radio, Select, DatePicker,} from 'antd';
 import React, { Component } from 'react';
+import moment from 'moment';
+import { reqViewOrEdit } from '../../../../api';
 import '../view/index.less';
 
 /**
@@ -10,24 +12,49 @@ export default class ViewUser extends Component {
     constructor(props){
         super(props);
         this.state={
+          userId: "",
           data: [],
         }
     }
+
+    //查看用户
+    getUserbyId = async() => {
+        const userId = this.state.userId;
+        // console.log('userId:'+userId);
+        const result = await reqViewOrEdit(userId);
+        if (result.code===200) {
+            console.log(result);
+           this.setState({
+                data: result.data,
+           }) 
+        }
+    }
+
     componentWillMount(){
         
-        this.setState({data: this.props.location.state});
+        this.setState({userId: this.props.location.state.id});
+        // const userId = this.state.userId;
+        // console.log('userId:'+userId);
         
+        
+    }
+    componentDidMount(){
+        this.getUserbyId();
     }
     
     render() {
-        const {data} = this.state;
-        console.log("data.status:"+data.status);
+        const {userId,data} = this.state;
+        //const userId = this.state.userId;
+        //console.log("data.status:"+data.status);
+        console.log("data:"+data);
+        console.log('userId:'+userId);
+        data.birthday = moment(data.birthday);
         return (
             // <div>查看用户: {this.props.location.state.username}</div>
             <div className="index_content">
                 <div className="ant-card">
                     <div className="ant-card-body">
-                        <Form className="ant-form">
+                        <Form className="ant-form" initialValues={this.state.data}>
 
                             <Form.Item label="姓名：" className="ant-row" rules={[{ required: true }]}>
                                 <Input placeholder="请输入" className="ant-input" value={data['username']} disabled="true"/>
@@ -41,7 +68,7 @@ export default class ViewUser extends Component {
                             </Form.Item>
 
                             <Form.Item label="权限角色：" rules={[{ required: true }]}>
-                                <Select placeholder="请选择" value={data.soles} disabled="true">
+                                <Select placeholder="请选择" value={data.roles} disabled="true">
                                     <Select.Option value="超级管理员">超级管理员</Select.Option>
                                     <Select.Option value="管理员">管理员</Select.Option>
                                     <Select.Option value="普通用户">普通用户</Select.Option>
@@ -65,11 +92,11 @@ export default class ViewUser extends Component {
                             </Form.Item>
 
                             <Form.Item label="单位名称：" rules={[{ required: true }]}>
-                                <Input  placeholder="请输入" value={data.company} disabled="true"/>
+                                <Input  placeholder="请输入" value={data.unitName} disabled="true"/>
                             </Form.Item>
 
                             <Form.Item label="职位名称：" rules={[{ required: true }]}>
-                                <Input  placeholder="请输入" value={data.position} disabled="true"/>
+                                <Input  placeholder="请输入" value={data.job} disabled="true"/>
                             </Form.Item>
 
                             <Form.Item label="状态：" rules={[{ required: true }]}>

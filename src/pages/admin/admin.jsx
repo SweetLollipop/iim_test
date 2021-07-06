@@ -20,7 +20,7 @@ import {
 import { withError } from 'antd/lib/modal/confirm';
 import PrivateRouter from '../../components/privateRouter';
 import ViewUser from './user/view';
-import EidtUser from './user/edit';
+import EditUser from './user/edit';
 const {  Sider, Content, Header, Footer} = Layout;
 /**
  * 后台管理的路由组件
@@ -108,7 +108,7 @@ class Admin extends Component {
                             
                             <Route exact path='/user' component={User}/>
                             <Route exact path='/user/view' component={ViewUser}/>
-                            <Route exact path='/user/edit' component={EidtUser}/>
+                            <Route exact path='/user/edit' component={EditUser}/>
 
                             <Redirect to='/home'/>
                         </Switch>

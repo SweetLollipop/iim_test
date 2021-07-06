@@ -24,6 +24,10 @@
  //添加或修改用户
  export const reqAddOrUpdateUser = (user) => ajax(BASE + '/manage/user/'+(user._id ? 'update' : 'add'), user, 'POST');
 
- //查看或编辑用户
+ //查看用户
 
- export const reqViewOrEdit = (userId) => ajax(BASE +'/ucenter/admin/sys/user/detail/'+userId,{userId},'GET');
+ export const reqViewUser = (userId) => ajax(BASE +'/ucenter/admin/sys/user/detail/'+userId,{userId},'GET');
+
+ //修改保存用户
+
+ export const reqSaveUser = (userId,values) => ajax(BASE +'/ucenter/admin/sys/user/update/'+userId,{values},'POST');

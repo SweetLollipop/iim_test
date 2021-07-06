@@ -1,7 +1,7 @@
 import { Form, Input, Radio, Select, DatePicker,} from 'antd';
 import React, { Component } from 'react';
 import moment from 'moment';
-import { reqViewOrEdit } from '../../../../api';
+import { reqViewUser } from '../../../../api';
 import '../view/index.less';
 
 /**
@@ -21,7 +21,7 @@ export default class ViewUser extends Component {
     getUserbyId = async() => {
         const userId = this.state.userId;
         // console.log('userId:'+userId);
-        const result = await reqViewOrEdit(userId);
+        const result = await reqViewUser(userId);
         if (result.code===200) {
             console.log(result);
            this.setState({
@@ -62,8 +62,8 @@ export default class ViewUser extends Component {
 
                             <Form.Item label="性别：" rules={[{ required: true }]}>
                                 <Radio.Group value={data["sex"]} disabled="true">
-                                    <Radio value="0">男</Radio>
-                                    <Radio value="1">女</Radio>
+                                    <Radio value={0}>男</Radio>
+                                    <Radio value={1}>女</Radio>
                                 </Radio.Group>
                             </Form.Item>
 
@@ -101,8 +101,8 @@ export default class ViewUser extends Component {
 
                             <Form.Item label="状态：" rules={[{ required: true }]}>
                                 <Radio.Group value={data.status} disabled="true">
-                                    <Radio value="0">无效</Radio>
-                                    <Radio value="1">有效</Radio>
+                                    <Radio value={0}>无效</Radio>
+                                    <Radio value={1}>有效</Radio>
                                 </Radio.Group>
                             </Form.Item>
 

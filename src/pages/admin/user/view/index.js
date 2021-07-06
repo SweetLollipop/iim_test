@@ -54,9 +54,9 @@ export default class ViewUser extends Component {
             <div className="index_content">
                 <div className="ant-card">
                     <div className="ant-card-body">
-                        <Form className="ant-form" initialValues={this.state.data}>
+                        <Form name="editForm" className="ant-form" initialValues={this.state.data}>
 
-                            <Form.Item label="姓名：" className="ant-row" rules={[{ required: true }]}>
+                            <Form.Item  label="姓名：" className="ant-row" rules={[{ required: true }]}>
                                 <Input placeholder="请输入" className="ant-input" value={data['username']} disabled="true"/>
                             </Form.Item>
 
@@ -69,9 +69,9 @@ export default class ViewUser extends Component {
 
                             <Form.Item label="权限角色：" rules={[{ required: true }]}>
                                 <Select placeholder="请选择" value={data.roles} disabled="true">
-                                    <Select.Option value="超级管理员">超级管理员</Select.Option>
-                                    <Select.Option value="管理员">管理员</Select.Option>
-                                    <Select.Option value="普通用户">普通用户</Select.Option>
+                                    <Select.Option value={["超级管理员"]}>超级管理员</Select.Option>
+                                    <Select.Option value={["管理员"]}>管理员</Select.Option>
+                                    <Select.Option value={["普通用户"]}>普通用户</Select.Option>
                                 </Select>
                             </Form.Item>
 

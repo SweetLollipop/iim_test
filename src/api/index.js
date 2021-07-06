@@ -30,4 +30,4 @@
 
  //修改保存用户
 
- export const reqSaveUser = (userId,values) => ajax(BASE +'/ucenter/admin/sys/user/update/'+userId,{values},'POST');
+ export const reqSaveUser = (userId,values) => ajax(BASE +'/ucenter/admin/sys/user/update/'+userId,values,'POST');

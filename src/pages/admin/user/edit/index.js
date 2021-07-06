@@ -73,37 +73,42 @@ export default class EditUser extends Component {
         console.log("data:"+data);
         console.log('userId:'+userId);
         // data.birthday = moment(data.birthday);
+        data.rolenames = data.roles;//修改data数组元素key
         return (
             // <div>编辑用户: {this.props.location.state.username}</div>
             <div className="index_content">
                 <div className="ant-card">
                     <div className="ant-card-body">
-                        <Form className="ant-form" onFinish={this.onFinish} onFinishFailed={this.onFinishFailed} ref="editForm">
+                        <Form name="editForm" className="ant-form" onFinish={this.onFinish} onFinishFailed={this.onFinishFailed} ref="editForm" initialValues={this.state.data}>
 
-                            <Form.Item label="姓名：" className="ant-row" rules={[{ required: true, message: "姓名不能为空" }]}>
+                            <Form.Item name="id" label="id：" className="ant-row" style={{display:'none'}} rules={[{ required: true, message: "id不能为空" }]}>
+                                <Input placeholder="请输入" className="ant-input" defaultValue={data['id']}  />
+                            </Form.Item>
+
+                            <Form.Item name="username" label="姓名：" className="ant-row" rules={[{ required: true, message: "姓名不能为空" }]}>
                                 <Input placeholder="请输入" className="ant-input" defaultValue={data['username']}  />
                             </Form.Item>
 
-                            <Form.Item label="性别：" rules={[{ required: true }]}>
+                            <Form.Item name="sex" label="性别：" rules={[{ required: true }]}>
                                 <Radio.Group defaultValue={data["sex"]}  >
                                     <Radio value={0}>男</Radio>
                                     <Radio value={1}>女</Radio>
                                 </Radio.Group>
                             </Form.Item>
 
-                            <Form.Item label="权限角色：" rules={[{ required: true }]}>
-                                <Select placeholder="请选择" defaultValue={data.roles}  >
-                                    <Select.Option value="超级管理员">超级管理员</Select.Option>
-                                    <Select.Option value="管理员">管理员</Select.Option>
-                                    <Select.Option value="普通用户">普通用户</Select.Option>
+                            <Form.Item name="rolenames" label="权限角色：" rules={[{ required: true }]}>
+                                <Select placeholder="请选择" defaultValue={data.rolenames}  >
+                                    <Select.Option value={["超级管理员"]}>超级管理员</Select.Option>
+                                    <Select.Option value={["管理员"]}>管理员</Select.Option>
+                                    <Select.Option value={["普通用户"]}>普通用户</Select.Option>
                                 </Select>
                             </Form.Item>
 
-                            <Form.Item label="昵称：" rules={[{ required: true }]}>
+                            <Form.Item name="nickname" label="昵称：" rules={[{ required: true }]}>
                                 <Input placeholder="请输入" defaultValue={data.nickname}  />
                             </Form.Item>
 
-                            <Form.Item label="手机号：" rules={[{ required: true, pattern:/^1[34578]\d{9}$/, message: "请输入正确的手机号码" }]}>
+                            <Form.Item name="mobile" label="手机号：" rules={[{ required: true, pattern:/^1[34578]\d{9}$/, message: "请输入正确的手机号码" }]}>
                                 <Input placeholder="请输入" defaultValue={data.mobile}  />
                             </Form.Item>
 
@@ -123,7 +128,7 @@ export default class EditUser extends Component {
                                 <Input  placeholder="请输入" defaultValue={data.job}  />
                             </Form.Item> */}
 
-                            <Form.Item label="状态：" rules={[{ required: true }]}>
+                            <Form.Item name="status" label="状态：" rules={[{ required: true }]}>
                                 <Radio.Group defaultValue={data.status}  >
                                     <Radio value={0}>无效</Radio>
                                     <Radio value={1}>有效</Radio>
